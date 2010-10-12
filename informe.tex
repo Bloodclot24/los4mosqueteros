@@ -1,0 +1,158 @@
+\documentclass[a4paper,10pt,titlepage]{article}
+\usepackage[left=2cm,top=3cm,right=2cm,bottom=1cm,head=2.0cm,includefoot]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{comment}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{bookman}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{moreverb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage[pdfborder={0 0 0 0}]{hyperref}
+\usepackage{fixltx2e}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{t1enc}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{hyperref}
+\tolerance=1000
+
+
+\title{75.15 - Base de Datos}
+\author{\textbf{Grupo 2}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\chead{75.15 - Base de Datos}
+\lhead{\includegraphics[width=1.5cm]{./logo1.png}}
+\lfoot{Grupo 2}
+\rfoot{$2^{do}$ Cuatrimestre 2010}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%documento
+\section{Enunciado}
+El canal de televisi\'on por cable ALAMBRIN, mantiene informaci\'on de la programaci\'on, publicidad y producci\'on
+de sus programas. Se cuenta con la siguiente informaci\'on:
+\\ \textbf{Programaci\'on} \\
+La programaci\'on del canal se emite diariamente de 7 a 24 hs. En ese horario se emiten programas en vivo o
+programas grabados. Cada programa tiene un nombre que lo identifica y una duraci\'on determinada. El canal
+cuenta con distintas clases de programas: Dibujos animados, Juegos y Entretenimientos, Humorísticos,
+Noticieros infantiles y Películas infantiles.
+El horario de transmisi\'on del canal se divide en espacios que tienen una duraci\'on determinada, identificados por
+el día y la hora en que se emite, y caracterizado por un precio ( por segundo en el aire ).
+El departamento de Programaci\'on del canal asigna a cada espacio un programa, y determina adem\'as si el
+espacio contiene tandas publicitarias, identificadas por el día, la hora y el n\'umero de tanda. Dichas tandas se
+corresponden a un espacio específico.
+\\ \textbf{Publicidad}\\
+El canal cuenta con una serie de anunciantes. A cada uno se le asigna un n\'umero de cuenta, y para cada uno se
+cuenta con su raz\'on social, domicilio y tel\'efono.
+En cada tanda se publicitan varios anuncios, identificados por un título. Cada anuncio se caracteriza por el
+producto ofrecido, la duraci\'on del mismo, y el anunciante que lo auspicia.
+Es importante para los anunciantes el orden en que saldr\'a al aire el anuncio dentro de la tanda, ya que de esa
+forma obtendr\'an mayor atenci\'on de los televidentes. Como ALAMBRIN es el canal líder para los niños, muchos
+anuncios salen al aire en diferentes tandas publicitarias.
+\\ \textbf{Producci\'on}\\
+Existen productores independientes que pueden proveer programas grabados al canal. Para aquellos
+productores ligados al canal se conoce su n\'umero de CUIT y raz\'on social.
+Debido al nuevo cambio de imagen propuesto por el departamento de Marketing, ALAMBRIN ha invertido en
+m\'oviles en exteriores de diferentes características t\'ecnicas. Dichos m\'oviles se utilizan en diferentes programas
+en vivo. Pero no todos los programas en vivo utilizan m\'oviles en exteriores. Algunos programas en vivo suelen
+tener asignados m\'as de un m\'ovil, sobre todo en \'epoca de vacaciones.
+Otro de los cambios de imagen impulsados por el canal consta en hacer participar al p\'ublico infantil de los
+programas en vivo. La cantidad de p\'ublico que ingresa al canal depende de la capacidad de los estudios
+ocupados para producir el programa. Cada estudio se identifica por un n\'umero \'unico.
+\\ \textbf{Hip\'otesis}\\
+\begin{itemize}
+\item En una misma tanda no puede repetirse un anuncio.
+\item La suma de las duraciones de los anuncios de una tanda, determina la duraci\'on de esa tanda.
+\item La suma de las duraciones de las tandas que componen un espacio, junto con la duraci\'on del programa
+emitido en dicho espacio, coincide exactamente con la duraci\'on del espacio
+\end{itemize}
+
+\subsection{Objetivo del Trabajo Pr\'actico}
+
+\begin{enumerate}
+\item Realizar un modelo E-R en base a la descripci\'on del enunciado y a los efectos de satisfacer los
+requerimientos de informaci\'on solicitados.
+\item Transformar el modelo E-R en un modelo relacional (modelo de tablas) utilizando los conocimientos de
+transformaci\'on de entidades a tablas.
+\end{enumerate}
+
+\textbf{Forma De Presentaci\'on Del Trabajo Practico:}
+\begin{enumerate}
+\item Presentar el diagrama de entidad - interrelaci\'on con indicaciones de restricciones de cardinalidad.
+\item Indicar dependencias de identidad y de existencia en el modelo.
+\item Especificar supuestos que justifiquen el modelo (Hip\'otesis).
+\item Presentar el diccionario de datos del diagrama con la siguiente informaci\'on:\\
+Para cada tipo de entidad se debe especificar:\\
+a) Definici\'on.\\
+b) Especificaci\'on de atributos.\\
+c) Especificaci\'on de identificador \'unico.\\
+Para cada tipo de interrelaci\'on se debe especificar:\\
+a) Definici\'on.\\
+b) Especificaci\'on de atributos.\\
+c) Especificaci\'on de identificador \'unico.\\
+
+\item Presentar el modelo Relacional ( "de tablas" ) indicando para cada esquema de relaci\'on:
+\begin{itemize}
+\item Atributos
+\item Claves candidatas
+\item Clave primaria
+\item Claves for\'aneas
+\item Atributos que pueden tomar valores nulos
+\item Realice el diagrama del Modelo de Tablas
+\end{itemize}
+
+\textbf{Nota}: en los casos en que existan diferentes alternativas para efectuar la transformaci\'on de MER al modelo
+de tablas, elegir una \'unica alternativa y enumerar las ventajas y desventajas de la alternativa elegida.
+
+\end{enumerate}
+
+\pagebreak
+\section{Resoluci\'on}
+\subsection{Diagrama Entidad - Interrelaci\'on}
+
+ACA VA EL DIAGRAMA
+
+\pagebreak
+
+\subsection{Dependencias}
+TODO
+
+\pagebreak
+
+\subsection{Hip\'otesis}
+\begin{itemize}
+\item Un programa tiene asociado a lo sumo un estudio.
+\item Cada m\'ovil de exterior se identifica un\'ivocamente por un n\'umero de m\'ovil.
+\item Cada programa tiene asociado un espacio (no existen programas sin asociar).
+\item Un programa tiene s\'olo un productor; un productor puede producir varios programas.
+\end{itemize}
+\pagebreak
+
+\subsection{Diccionario}
+ENUMERAR TODAS LAS ENTIDADES Y DESCRIBIRLAS
+
+\pagebreak
+\subsection{Modelo Relacional}
+TODO
+\pagebreak
+
+\end{document}
