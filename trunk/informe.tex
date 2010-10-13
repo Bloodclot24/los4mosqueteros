@@ -134,7 +134,10 @@ ACA VA EL DIAGRAMA
 \pagebreak
 
 \subsection{Dependencias}
-TODO
+TODO Hacer una descripcion como las del diccionario
+
+Se identific\'o la entidad d\'ebil Tanda, la cual depende de la entidad Espacio.
+Para identificar a la entidad Tanda, utilizamos, el dia y la hora que son clave de la entidad Espacio y como atributo discriminante de la entidad d\'ebil usamos NroTanda.
 
 \pagebreak
 
@@ -149,6 +152,164 @@ TODO
 
 \subsection{Diccionario}
 ENUMERAR TODAS LAS ENTIDADES Y DESCRIBIRLAS
+\begin{enumerate}
+
+\item {\bf Espacio}
+
+\begin{itemize}
+ 
+\item \underline{Definici\'on}
+
+El tiempo de transmici\'on se divide en espacios. Esta entidad, representa cada uno de dichos espacios.
+Dentro de estos puede haber tandas y un programa. Los espacios cuentan con una duraci\'on
+(la misma se obtiene como: la suma de las duraciones de las tandas que contiene y la duraci\'on del programa), una fecha, una hora y un precio determinados.
+
+\item \underline{Especificaci\'on de atributos}
+
+-Dia: Especifica el d\'ia en que se ubica el espacio dentro de la programaci\'on.
+-Fecha: Especifica la fecha en la cu\'al va a emitirse el espacio en cuestion.
+-Hora: Especifica la hora de inicio del espacio en cuestion.
+-Precio: Especifica el valor comercial del espacio.
+
+\item \underline{Especificaci\'on de identificador \'unico}
+
+{\bf TODO! ver cual va a ser la clave}
+-Dia
+-Fecha
+-Hora
+\end{itemize}
+
+\item {\bf Programa}
+
+\begin{itemize}
+ 
+\item \underline{Definici\'on}
+
+Un programa esta contenido en un espacio. 
+
+\item \underline{Especificaci\'on de atributos}
+
+-Tipo: Este atributo especifica el tipo del programa en cuestion, el mismo puede ser: dibujos animados,juegos y entretenimientos,humor\'isticos,noticieros infantiles y pel\'iculas infantiles.
+-Duracion: Representa la duraci\'on total del programa.
+
+\item \underline{Especificaci\'on de indentificador \'unico}
+
+-Nombre: Representa el nombre del programa en cuestion.
+
+\end{itemize}
+
+\item {\bf Programa en vivo}
+
+\item {\bf Programa grabado}
+
+\item {\bf Movil Exterior}
+
+\begin{itemize}
+ 
+\item \underline{Definici\'on}
+
+Esta entidad representa el m\'ovil de exterior que puede estar asociado a un programa en vivo.
+
+\item \underline{Especificaci\'on de atributos}
+
+
+\item \underline{Especificaci\'on de identificador \'unico}
+
+-NroMovil:Representa el n\'umero que identifica un\'ivocamente a cada uno de los moviles de exterior.
+
+\end{itemize}
+
+\item {\bf Estudio}
+
+\begin{itemize}
+
+\item \underline{Definici\'on}
+
+Representa el lugar f\'isico en el cual se desarrolla un programa en vivo.
+
+\item \underline{Especificaci\'on de atributos}
+
+-CantidadPersonas: Representa la cantidad m\'axima de personas que puede alojar un estudio.
+
+\item \underline{Especificaci\'on de identificador \'unico}
+
+-NroEstudio: Representa el n\'umero que identifica un\'ivocamente cada estudio.
+
+\end{itemize}
+
+
+\item {\bf Productor Independiente}
+
+\begin{itemize}
+
+\item \underline{Definici\'on}
+
+Representa al productor que le provee al canal sus programas grabados.
+
+\item \underline{Especificaci\'on de atributos}
+
+-Razon social: Representa la raz\'on social del productor en cuestion.
+
+\item \underline{Especificaci\'on de identificador \'unico}
+
+-CUIT: Representa el n\'umero de CUIT del productor en cuestion.
+
+\end{itemize}
+
+
+\item {\bf Anuncio}
+
+\begin{itemize}
+
+\item \underline{Definici\'on}
+
+Es la publicidad que representa a un producto en particular.
+
+\item \underline{Especificaci\'on de atributos}
+
+-Duracion: Representa la duraci\'on del anuncio a emitir.
+-Producto ofrecido: Representa el producto que se ofrece en el anuncio.
+
+\item \underline{Especificaci\'on de identificador unico}
+
+-Titulo: Representa el t\'itulo del anuncio en cuestion.
+
+\end{itemize}
+
+
+\item {\bf Anunciante}
+
+\begin{itemize}
+
+\item \underline{Definici\'on}
+
+Es la entidad propietaria de un anuncio en particular. 
+
+\item \underline{Especificaci\'on de atributos}
+
+-Razon social: Representa la raz\'on social del anunciante.
+-Telefono: Representa el tel\'efono del anunciante.
+-Domicilio: Representa la direcci\'on f\'isica o legal del anunciante.
+
+\item \underline{Especificaci\'on de identificador \'unico}
+
+-NroCuenta: Representa el n\'umero de la cuenta que el anunciante tiene con el canal.
+
+\end{itemize}
+
+
+{\bf Interrelaciones}
+
+
+*Se publicita en
+
+Definici\'on:
+
+Especificaci\'on de atributos
+
+Especificaci\'on de identificador \'unico:
+
+\end{enumerate}
 
 \pagebreak
 \subsection{Modelo Relacional}
