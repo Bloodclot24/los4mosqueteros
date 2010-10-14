@@ -313,7 +313,88 @@ Especificaci\'on de identificador \'unico:
 
 \pagebreak
 \subsection{Modelo Relacional}
-TODO
+
+PROGRAMA (nombrePrograma, tipo, duracion, modalidad)\\
+PK: (nombre)\\
+FK:\\
+CK: (nombre)\\
+NV: (tipo, modalidad)\\
+\\
+ESPACIO (dia, hora, duracion, precio)\\
+PK: (dia, hora)\\
+FK: (nombrePrograma)\\
+CK: (dia, hora)\\
+NV: (precio)\\
+\\
+TANDA (nroTanda, dia, hora)\\
+PK: (nroTanda)\\
+FK: (dia, hora)\\
+CK: (nroTanda)\\
+NV:\\
+\\
+SE\_PUBLICIA\_TEN (orden, nroTanda, tituloAnuncio)\\
+PK: (nroTanda, orden)\\
+FK: (nroTanda); (tituloAnuncio)\\
+CK: (nroTanda, orden); (nroTanda, tituloAnuncio)\\
+NV:\\
+\\
+ANUNCIO (tituloAnuncio, productoOfrecido, duracion)\\
+PK: (tituloAnuncio)\\
+FK:\\
+CK: (tituloAnuncio); (tituloAnuncio, productoOfrecido)\\
+NV: \\
+\\
+ANUNCIANTE (nroCuenta, razonSocial, domicilio, telefono)\\
+PK: (nroCuenta)\\
+FK:\\
+CK: (nroCuenta); (razonSocial); (razonSocial,domicilio)\\
+NV: (domicilio, telefono)\\
+\\
+UTILIZA\_UN (nombrePrograma, nroMovil)\\
+PK: (nombrePrograma, nroMovil)\\
+FK: (nombrePrograma); (nroMovil)\\
+CK: (nombrePrograma, nroMovil)\\
+NV:\\
+\\
+MOVIL\_EXTERIOR (nroMovil)\\
+PK: (nroMovil)\\
+FK:\\
+CK: (nroMovil)\\
+NV:\\
+\\
+REALIZADO\_EN (nombrePrograma, nroEstudio)\\
+PK: (nombrePrograma, nroEstudio)\\
+FK: (nombrePrograma); (nroEstudio)\\
+CK: (nombrePrograma, nroEstudio)\\
+NV:\\
+\\
+ESTUDIO (nroEstudio, cantidadPersonas)\\
+PK: (nroEstudio)\\
+FK:\\
+CK: (nroEstudio)\\
+NV:\\
+\\
+PRODUCIDO\_POR (nombrePrograma,cuit)\\
+PK: (nombrePrograma,cuit)\\
+FK: (nombrePrograma); (cuit)\\
+CK: (nombrePrograma,cuit)\\
+NV:\\
+\\
+PRODUCTOR\_INDEPENDIENTE (cuit, razonSocial)\\
+PK: (cuit)\\
+FK:\\
+CK: (cuit); (razonSocial)\\
+NV: (razonSocial)\\
+\\
+NOTACION:\\
+PK: Clave Primaria o Primary Key\\
+FK: Clave Foranea o Foreign Key\\
+CK: Clave Candidata o Candidate Key\\
+NV: Atributos que pueden tomar valores nulos o Null Values\\
+\\
+NOTA:\\
+Para las entidades PROGRAMA\_EN\_VIVO y PROGRAMA\_GRABADO se optó por agregarlas como un atributo (modalidad) de la entidad PROGRAMA al hacer la transformación del modelo Entidad-Relación al modelo Relacional. Esto se hizo para manejar menos tablas y no tener que mantener un identificador de la entidad PROGRAMA que debería mantenerse en las dos entidades dependientes. La desventaja es que se pierde la visión global que se tenia con el grafico de chen.\\
+
 \pagebreak
 
 \end{document}
