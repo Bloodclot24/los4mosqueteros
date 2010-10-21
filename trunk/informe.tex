@@ -314,13 +314,25 @@ Especificaci\'on de identificador \'unico:
 \pagebreak
 \subsection{Modelo Relacional}
 
-PROGRAMA (nombrePrograma, tipo, duracion, modalidad)\\
-PK: (nombre)\\
-FK:\\
-CK: (nombre)\\
-NV: (tipo, modalidad)\\
+PROGRAMA (nombrePrograma, duracion, tipo)\\
+PK: (nombrePrograma)\\
+FK: --\\
+CK: (nombrePrograma)\\
+NV: --\\
 \\
-ESPACIO (dia, hora, duracion, precio)\\
+PROGRAMA\_VIVO (nombrePrograma, nroEstudio)\\
+PK: (nombrePrograma)\\
+FK: (nroEstudio)\\
+CK: (nombrePrograma)\\
+NV: (nroEstudio)\\
+\\
+PROGRAMA\_GRAB (nombrePrograma, cuit\_pi)\\
+PK: (nombrePrograma)\\
+FK: (cuit\_pi)\\
+CK: (nombrePrograma)\\
+NV: --\\
+\\
+ESPACIO (dia, hora, duracion, precio, nombrePrograma)\\
 PK: (dia, hora)\\
 FK: (nombrePrograma)\\
 CK: (dia, hora)\\
@@ -330,70 +342,56 @@ TANDA (nroTanda, dia, hora)\\
 PK: (nroTanda)\\
 FK: (dia, hora)\\
 CK: (nroTanda)\\
-NV:\\
+NV: --\\
 \\
-SE\_PUBLICIA\_TEN (orden, nroTanda, tituloAnuncio)\\
-PK: (nroTanda, orden)\\
-FK: (nroTanda); (tituloAnuncio)\\
+SE\_PUBLICITA\_EN (nroTanda, dia, hora, tituloAnuncio, orden)\\
+PK: (orden, dia, hora, tituloAnuncio, nroTanda)\\
+FK: (nroTanda, dia, hora); (tituloAnuncio)\\
 CK: (nroTanda, orden); (nroTanda, tituloAnuncio)\\
-NV:\\
+NV: --\\
 \\
-ANUNCIO (tituloAnuncio, productoOfrecido, duracion)\\
+ANUNCIO (tituloAnuncio, productoOfrecido, duracion, nroCuenta)\\
 PK: (tituloAnuncio)\\
-FK:\\
-CK: (tituloAnuncio); (tituloAnuncio, productoOfrecido)\\
-NV: \\
+FK: (nroCuenta)\\
+CK: (tituloAnuncio)\\
+NV: --\\
 \\
 ANUNCIANTE (nroCuenta, razonSocial, domicilio, telefono)\\
 PK: (nroCuenta)\\
-FK:\\
-CK: (nroCuenta); (razonSocial); (razonSocial,domicilio)\\
+FK: --\\
+CK: (nroCuenta); (razonSocial)\\
 NV: (domicilio, telefono)\\
 \\
 UTILIZA\_UN (nombrePrograma, nroMovil)\\
 PK: (nombrePrograma, nroMovil)\\
 FK: (nombrePrograma); (nroMovil)\\
 CK: (nombrePrograma, nroMovil)\\
-NV:\\
+NV: --\\
 \\
 MOVIL\_EXTERIOR (nroMovil)\\
 PK: (nroMovil)\\
-FK:\\
+FK: --\\
 CK: (nroMovil)\\
-NV:\\
-\\
-REALIZADO\_EN (nombrePrograma, nroEstudio)\\
-PK: (nombrePrograma, nroEstudio)\\
-FK: (nombrePrograma); (nroEstudio)\\
-CK: (nombrePrograma, nroEstudio)\\
-NV:\\
+NV: --\\
 \\
 ESTUDIO (nroEstudio, cantidadPersonas)\\
 PK: (nroEstudio)\\
-FK:\\
+FK: --\\
 CK: (nroEstudio)\\
-NV:\\
+NV: (cantidadPersonas)\\
 \\
-PRODUCIDO\_POR (nombrePrograma,cuit)\\
-PK: (nombrePrograma,cuit)\\
-FK: (nombrePrograma); (cuit)\\
-CK: (nombrePrograma,cuit)\\
-NV:\\
+PRODUCTOR\_INDEPENDIENTE (cuit\_pi, razonSocial)\\
+PK: (cuit\_pi)\\
+FK: --\\
+CK: (cuit\_pi); (razonSocial)\\
+NV: --\\
 \\
-PRODUCTOR\_INDEPENDIENTE (cuit, razonSocial)\\
-PK: (cuit)\\
-FK:\\
-CK: (cuit); (razonSocial)\\
-NV: (razonSocial)\\
-\\
-NOTACION:\\
+\underline{NOTACION:}\\
 PK: Clave Primaria o Primary Key\\
 FK: Clave Foranea o Foreign Key\\
 CK: Clave Candidata o Candidate Key\\
 NV: Atributos que pueden tomar valores nulos o Null Values\\
 \\
-NOTA:\\
-Para las entidades PROGRAMA\_EN\_VIVO y PROGRAMA\_GRABADO se optó por agregarlas como un atributo (modalidad) de la entidad PROGRAMA al hacer la transformación del modelo Entidad-Relación al modelo Relacional. Esto se hizo para manejar menos tablas y no tener que mantener un identificador de la entidad PROGRAMA que debería mantenerse en las dos entidades dependientes. La desventaja es que se pierde la visión global que se tenia con el grafico de chen.\\
 
 \pagebreak
 

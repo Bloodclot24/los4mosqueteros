@@ -41,9 +41,9 @@
     \node[entity] (progvivo) [below left=1cm of isa] {Programa en vivo} edge (isa);
     \node[entity] (proggrab) [below right=1cm of isa] {Programa grabado} edge (isa);
     
-    \node[relationship] (prodx) [below=of proggrab] {Producido por} edge node[auto,swap] {1,1} (proggrab);
+    \node[relationship] (prodx) [below=of proggrab] {Producido por} edge node[auto,swap] {1,N} (proggrab);
     
-    \node[entity] (productorind) [below=of prodx] {Productor independiente} edge node[auto,swap] {1,N} (prodx);
+    \node[entity] (productorind) [below=of prodx] {Productor independiente} edge node[auto,swap] {1,1} (prodx);
     \node[attribute] (cuit) [below=of productorind] {\key{CUIT}} edge (productorind);
     \node[attribute] (razSoc) [below right=of productorind] {\key{Razon social}} edge (productorind);
     
@@ -52,9 +52,9 @@
     \node[entity] (movilExt) [left=of utiliza] {Movil exterior} edge node[auto,swap] {0,N} (utiliza);
     \node[attribute] (nroMov) [left=of movilExt] {\key{NroMovil}} edge (movilExt);
     
-    \node[relationship] (realien) [below=of progvivo] {Realizado en} edge node[auto,swap] {1,N} (progvivo);
+    \node[relationship] (realien) [below=of progvivo] {Realizado en} edge node[auto,swap] {0,N} (progvivo);
     
-    \node[entity] (est) [below=of realien] {Estudio} edge node[auto,swap] {0,N} (realien);
+    \node[entity] (est) [below=of realien] {Estudio} edge node[auto,swap] {0,1} (realien);
     \node[attribute] (nroEst) [below=of est] {\key{NroEstudio}} edge (est);
     \node[attribute] (cantEst) [left=of est] {Cantidad personas} edge (est);    
     
