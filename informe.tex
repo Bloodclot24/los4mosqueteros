@@ -28,6 +28,7 @@
 \usepackage{amssymb}
 \usepackage{microtype}
 \usepackage{hyperref}
+\usepackage{pdfpages} % to import PDF pages
 \tolerance=1000
 
 
@@ -49,7 +50,7 @@
 %documento
 \section{Enunciado}
 El canal de televisi\'on por cable ALAMBRIN, mantiene informaci\'on de la programaci\'on, publicidad y producci\'on
-de sus programas. Se cuenta con la siguiente informaci\'on:
+de sus programas. Se cuenta con la siguiente informaci\'on:\\
 \\ \textbf{Programaci\'on} \\
 La programaci\'on del canal se emite diariamente de 7 a 24 hs. En ese horario se emiten programas en vivo o
 programas grabados. Cada programa tiene un nombre que lo identifica y una duraci\'on determinada. El canal
@@ -59,7 +60,7 @@ El horario de transmisi\'on del canal se divide en espacios que tienen una durac
 el día y la hora en que se emite, y caracterizado por un precio ( por segundo en el aire ).
 El departamento de Programaci\'on del canal asigna a cada espacio un programa, y determina adem\'as si el
 espacio contiene tandas publicitarias, identificadas por el día, la hora y el n\'umero de tanda. Dichas tandas se
-corresponden a un espacio específico.
+corresponden a un espacio específico.\\
 \\ \textbf{Publicidad}\\
 El canal cuenta con una serie de anunciantes. A cada uno se le asigna un n\'umero de cuenta, y para cada uno se
 cuenta con su raz\'on social, domicilio y tel\'efono.
@@ -67,7 +68,7 @@ En cada tanda se publicitan varios anuncios, identificados por un título. Cada 
 producto ofrecido, la duraci\'on del mismo, y el anunciante que lo auspicia.
 Es importante para los anunciantes el orden en que saldr\'a al aire el anuncio dentro de la tanda, ya que de esa
 forma obtendr\'an mayor atenci\'on de los televidentes. Como ALAMBRIN es el canal líder para los niños, muchos
-anuncios salen al aire en diferentes tandas publicitarias.
+anuncios salen al aire en diferentes tandas publicitarias.\\
 \\ \textbf{Producci\'on}\\
 Existen productores independientes que pueden proveer programas grabados al canal. Para aquellos
 productores ligados al canal se conoce su n\'umero de CUIT y raz\'on social.
@@ -77,8 +78,9 @@ en vivo. Pero no todos los programas en vivo utilizan m\'oviles en exteriores. A
 tener asignados m\'as de un m\'ovil, sobre todo en \'epoca de vacaciones.
 Otro de los cambios de imagen impulsados por el canal consta en hacer participar al p\'ublico infantil de los
 programas en vivo. La cantidad de p\'ublico que ingresa al canal depende de la capacidad de los estudios
-ocupados para producir el programa. Cada estudio se identifica por un n\'umero \'unico.
-\\ \textbf{Hip\'otesis}\\
+ocupados para producir el programa. Cada estudio se identifica por un n\'umero \'unico.\\
+\\
+ \textbf{Hip\'otesis}
 \begin{itemize}
 \item En una misma tanda no puede repetirse un anuncio.
 \item La suma de las duraciones de los anuncios de una tanda, determina la duraci\'on de esa tanda.
@@ -129,15 +131,6 @@ de tablas, elegir una \'unica alternativa y enumerar las ventajas y desventajas 
 \section{Resoluci\'on}
 \subsection{Diagrama Entidad - Interrelaci\'on}
 
-ACA VA EL DIAGRAMA
-
-\pagebreak
-
-\subsection{Dependencias}
-TODO Hacer una descripcion como las del diccionario
-
-Se identific\'o la entidad d\'ebil Tanda, la cual depende de la entidad Espacio.
-Para identificar a la entidad Tanda, utilizamos, el dia y la hora que son clave de la entidad Espacio y como atributo discriminante de la entidad d\'ebil usamos NroTanda.
 
 \pagebreak
 
@@ -148,10 +141,16 @@ Para identificar a la entidad Tanda, utilizamos, el dia y la hora que son clave 
 \item Cada programa tiene asociado un espacio (no existen programas sin asociar).
 \item Un programa tiene s\'olo un productor; un productor puede producir varios programas.
 \end{itemize}
+
+\subsection{Dependencias}
+
+Se identific\'o la entidad d\'ebil Tanda, la cual depende de la entidad Espacio.\\
+Para identificar a la entidad Tanda, utilizamos, el dia y la hora que son clave de la entidad Espacio y como atributo discriminante de la entidad d\'ebil usamos NroTanda.
+
 \pagebreak
 
 \subsection{Diccionario}
-ENUMERAR TODAS LAS ENTIDADES Y DESCRIBIRLAS
+\subsubsection{Entidades}
 \begin{enumerate}
 
 \item {\bf Espacio}
@@ -166,17 +165,14 @@ Dentro de estos puede haber tandas y un programa. Los espacios cuentan con una d
 
 \item \underline{Especificaci\'on de atributos}
 
--Dia: Especifica el d\'ia en que se ubica el espacio dentro de la programaci\'on.
--Fecha: Especifica la fecha en la cu\'al va a emitirse el espacio en cuestion.
--Hora: Especifica la hora de inicio del espacio en cuestion.
--Precio: Especifica el valor comercial del espacio.
+-Dia: Especifica el d\'ia en que se ubica el espacio dentro de la programaci\'on.\\
+-Fecha: Especifica la fecha en la cu\'al va a emitirse el espacio en cuestion.\\
+-Hora: Especifica la hora de inicio del espacio en cuestion.\\
+-Precio: Especifica el valor comercial del espacio.\\
 
-\item \underline{Especificaci\'on de identificador \'unico}
-
-{\bf TODO! ver cual va a ser la clave}
--Dia
--Fecha
--Hora
+\item \underline{Especificaci\'on de identificador \'unico}\\
+-Dia: \\
+-Hora\\
 \end{itemize}
 
 \item {\bf Programa}
@@ -185,11 +181,11 @@ Dentro de estos puede haber tandas y un programa. Los espacios cuentan con una d
  
 \item \underline{Definici\'on}
 
-Un programa esta contenido en un espacio. 
+Un programa est\'a contenido en un espacio. 
 
 \item \underline{Especificaci\'on de atributos}
 
--Tipo: Este atributo especifica el tipo del programa en cuestion, el mismo puede ser: dibujos animados,juegos y entretenimientos,humor\'isticos,noticieros infantiles y pel\'iculas infantiles.
+-Tipo: Este atributo especifica el tipo del programa en cuestion, el mismo puede ser: dibujos animados,juegos y entretenimientos,humor\'isticos,noticieros infantiles y pel\'iculas infantiles.\\
 -Duracion: Representa la duraci\'on total del programa.
 
 \item \underline{Especificaci\'on de indentificador \'unico}
@@ -199,10 +195,39 @@ Un programa esta contenido en un espacio.
 \end{itemize}
 
 \item {\bf Programa en vivo}
+\begin{itemize}
+ 
+\item \underline{Definici\'on}
+
+Un programa en vivo est\'a contenido en un espacio y tiene moviles asociados. Es una especificaci\'on de un Programa. 
+
+\item \underline{Especificaci\'on de atributos}
+
+No tiene atributos propios.
+
+\item \underline{Especificaci\'on de indentificador \'unico}
+
+-Nombre: Representa el nombre del programa en cuestion.
+
+\end{itemize}
 
 \item {\bf Programa grabado}
+\begin{itemize}
+ 
+\item \underline{Definici\'on}
 
-\item {\bf Movil Exterior}
+Un programa grabado est\'a contenido en un espacio y tiene productores independientes asociados. Es una especificaci\'on de Programa. 
+
+\item \underline{Especificaci\'on de atributos}\\
+No tiene atributos propios
+
+\item \underline{Especificaci\'on de indentificador \'unico}
+
+-Nombre: Representa el nombre del programa en cuestion.
+
+\end{itemize}
+
+\item {\bf M\'ovil Exterior}
 
 \begin{itemize}
  
@@ -210,12 +235,9 @@ Un programa esta contenido en un espacio.
 
 Esta entidad representa el m\'ovil de exterior que puede estar asociado a un programa en vivo.
 
-\item \underline{Especificaci\'on de atributos}
-
-
 \item \underline{Especificaci\'on de identificador \'unico}
 
--NroMovil:Representa el n\'umero que identifica un\'ivocamente a cada uno de los moviles de exterior.
+-NroMovil: Representa el n\'umero que identifica un\'ivocamente a cada uno de los moviles de exterior.
 
 \end{itemize}
 
@@ -267,7 +289,7 @@ Es la publicidad que representa a un producto en particular.
 
 \item \underline{Especificaci\'on de atributos}
 
--Duracion: Representa la duraci\'on del anuncio a emitir.
+-Duracion: Representa la duraci\'on del anuncio a emitir.\\
 -Producto ofrecido: Representa el producto que se ofrece en el anuncio.
 
 \item \underline{Especificaci\'on de identificador unico}
@@ -287,32 +309,35 @@ Es la entidad propietaria de un anuncio en particular.
 
 \item \underline{Especificaci\'on de atributos}
 
--Razon social: Representa la raz\'on social del anunciante.
--Telefono: Representa el tel\'efono del anunciante.
--Domicilio: Representa la direcci\'on f\'isica o legal del anunciante.
+-Razon social: Representa la raz\'on social del anunciante.\\
+-Telefono: Representa el tel\'efono del anunciante.\\
+-Domicilio: Representa la direcci\'on f\'isica o legal del anunciante.\\
 
 \item \underline{Especificaci\'on de identificador \'unico}
 
 -NroCuenta: Representa el n\'umero de la cuenta que el anunciante tiene con el canal.
 
 \end{itemize}
-
-
-{\bf Interrelaciones}
-
-
-*Se publicita en
-
-Definici\'on:
-
-Especificaci\'on de atributos
-
-Especificaci\'on de identificador \'unico:
-
 \end{enumerate}
+
+\subsubsection{Interrelaciones}
+
+\textbf{1- Se publicita en:}
+\begin{itemize}
+\item \underline{Definici\'on}
+Relaciona un Anuncio con una Tanda, indicando el orden en que ese Anuncio es emitido dentro de una Tanda en particular.
+\item \underline{Especificaci\'on de atributos}
+-Orden: Establece el numero de orden en que un Anuncio es emitido en una Tanda. 
+\item \underline{Especificaci\'on de identificador \'unico}
+- Orden, tituloAnuncio, dia, hora, nroTanda: La publicidad se realiza en un dia y hora pertenecientes a la Tanda, en orden espec\'ifico para cada Anuncio.
+\end{itemize}
+
+-\textbf{Nota}: El resto de las interrelaciones se considera que no necesitan especificaci\'on ya que simplemente relacionan entidades, sin ninguna particularidad. 
 
 \pagebreak
 \subsection{Modelo Relacional}
+
+\subsubsection{Dise\~no del Modelo}
 
 PROGRAMA (nombrePrograma, duracion, tipo)\\
 PK: (nombrePrograma)\\
@@ -347,7 +372,7 @@ NV: --\\
 SE\_PUBLICITA\_EN (nroTanda, dia, hora, tituloAnuncio, orden)\\
 PK: (orden, dia, hora, tituloAnuncio, nroTanda)\\
 FK: (nroTanda, dia, hora); (tituloAnuncio)\\
-CK: (nroTanda, orden); (nroTanda, tituloAnuncio)\\
+CK: (orden, dia, hora, tituloAnuncio, nroTanda)\\
 NV: --\\
 \\
 ANUNCIO (tituloAnuncio, productoOfrecido, duracion, nroCuenta)\\
@@ -393,6 +418,9 @@ CK: Clave Candidata o Candidate Key\\
 NV: Atributos que pueden tomar valores nulos o Null Values\\
 \\
 
-\pagebreak
+\subsubsection{Diagrama de Tablas}
+\begin{center}
+\includegraphics[width=18cm]{./tablas.png}    
+\end{center}
 
 \end{document}

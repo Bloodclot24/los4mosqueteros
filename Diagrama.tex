@@ -27,7 +27,7 @@
     \node[attribute] (prec) [above=of esp] {Precio} edge (esp);
     \node[attribute] (hr) [above right=of esp] {\key{Hora}} edge (esp);
     \node[attribute] (dia) [above left=of esp] {\key{Dia}} edge (esp);
-    \node[attribute] (fecha) [below right=of esp] {\key{Fecha}} edge (esp);
+    \node[attribute] (fecha) [below right=of esp] {Fecha} edge (esp);
    
     \node[relationship] (tiene un) [right=of esp] {tiene un} edge node[auto,swap] {1,1} (esp);
     
@@ -45,7 +45,7 @@
     
     \node[entity] (productorind) [below=of prodx] {Productor independiente} edge node[auto,swap] {1,1} (prodx);
     \node[attribute] (cuit) [below=of productorind] {\key{CUIT}} edge (productorind);
-    \node[attribute] (razSoc) [below right=of productorind] {\key{Razon social}} edge (productorind);
+    \node[attribute] (razSoc) [below right=of productorind] {Razon social} edge (productorind);
     
     \node[relationship] (utiliza) [left=of progvivo] {Utiliza un} edge node[auto,swap] {1,N} (progvivo);
     
