@@ -1,0 +1,103 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[left=2cm,top=3cm,right=2cm,bottom=1cm,head=2.0cm,includefoot]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{comment}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{bookman}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{moreverb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage[pdfborder={0 0 0 0}]{hyperref}
+\usepackage{fixltx2e}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{t1enc}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{pdfpages} % to import PDF pages
+\tolerance=1000
+
+\begin{document}
+
+\pagestyle{fancy}
+\chead{75.15 - Base de Datos}
+\lhead{\includegraphics[width=1.5cm]{./logo1.png}}
+\lfoot{Grupo 2}
+\rfoot{$2^{do}$ Cuatrimestre 2010}
+
+%\tableofcontents
+%\newpage
+
+\section*{Consultas SQL}
+
+\subsection*{Enunciado}
+
+ Para realizar las consultas se deben utilizar , sin excepción , las
+  tablas de la base de datos del link precitado\footnote{Para acceder a la base de datos:  \href{http://apex.oracle.com/pls/otn/f?p=26093:1}{http://apex.oracle.com/pls/otn/f?p=26093:1} con usuario y password: test. }.  Utilizando
+  únicamente las sentencias y cláusulas especificadas en la cartilla
+  de sintaxis SQL incluída en el apunte, obtener:
+
+\begin{enumerate}
+\item Todos los programas que no se emiten los fines de semana.
+\item El o los días de la semana en que el anunciante \textbf{“Juan Uncio”},
+     anuncie su mayor cantidad diaria de anuncios.
+\item La razón social de los anunciantes que anuncian en la mayor
+     cantidad de programas distintos.
+\item El nombre de los programas grabados que se emitan en promedio más
+     veces por día los fines de semana que los días laborales (lunes a
+     viernes).
+\item El día, hora y número de tanda de las tandas que tengan una
+     cantidad de anuncios mayor que el promedio de anuncios por tanda
+     del mismo día.
+\item Para cada día, mostrar el día, la hora y el nombre del programa
+     que se emite en el espacio con la mayor cantidad de anuncios
+     distintos de cada día.
+\item El nombre de los programas en vivo que se emiten en todos los
+     días hábiles (lunes a viernes).
+\item Los días en que se ocupan todos los estudios.
+\item La razón social de los anunciantes que tienen al menos un anuncio
+     de sus productos en las emisiones de todos los programas del
+     productor \textbf{“ROMUALDO”}.
+\item El nombre de los programas que se emiten en todos los días en
+      que al menos una vez sean utilizados todos los móviles por
+      cualquiera de los programas emitidos en ese día.
+\end{enumerate}
+\newpage
+
+\subsection*{Resoluci\'on}
+
+\begin{enumerate}
+
+
+ \item No se que escribir aca =P
+\begin{tabbing}
+ \textbf{SELECT} \= p.COD\_PROG, p.NOMBRE\\
+ \textbf{FROM} \=PROGRAMA p\\
+ \textbf{WHERE NOT EXISTS} (\\
+ \> \textbf{SELECT} \= *\\
+ \>  \textbf{FROM} \= PROGRAMA p2, ESPACIO e\\
+ \>   \textbf{WHERE} \= p2.COD\_PROG = P.COD\_PROG \textbf{AND} p.COD\_PROG = e.COD\_PROG \\ \>   \=\textbf{AND} (e.DIA = 'DOM'\textbf{OR} e.DIA = 'SAB') \\)\\
+
+\end{tabbing}
+
+ \item siguiente
+lala
+
+\end{enumerate}
+
+
+\end{document}
