@@ -36,4 +36,11 @@ WHERE EXISTS (
    WHERE e1.COD_PROG = p.COD_PROG AND e2.COD_PROG = p.COD_PROG AND e3.COD_PROG = p.COD_PROG AND e4.COD_PROG = p.COD_PROG AND e5.COD_PROG = p.COD_PROG AND e1.DIA = 'LUN' AND e2.DIA = 'MAR' AND e3.DIA = 'MIE' AND e4.DIA = 'JUE' AND e5.DIA = 'VIE'
 )
 
+10) /********** PRACTICANDO PARA EL RECUPERATORIO, HICIMOS ESTA CON KAREN, FUNCIONA BIEN **********/
+/***********, e.DIA **** AGREGARLO PARA DEBUG xD***/
+
+select p.NOMBRE 
+from PROGRAMA p, ESPACIO e
+where e.COD_PROG=p.COD_PROG
+and e.DIA in (select e1.DIA from ESPACIO e1 where  not exists(select * from MOVIL_EXTERIOR me where not exists(select * from UTILIZACION ut1,ESPACIO e2 where e2.COD_PROG=ut1.COD_PROG and ut1.MOVIL=me.MOVIL and e2.DIA=e1.DIA)));
 
