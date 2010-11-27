@@ -56,24 +56,19 @@ WHERE semana.nombre = findesemana.nombre
 AND findesemana.promedio > semana.promedio
 
  
- 5) /* hasta aca hace promedio */
- SELECT DISTINCT dia, AVG(cant_dia) as prom_dia
+ 5) 
+
+SELECT t.dia, t.hora, t.tanda
+FROM 
+(SELECT dia, hora, tanda, COUNT(*) AS cant_anuncios
+FROM Publicidad 
+GROUP BY dia, hora, tanda) t, 
+ (SELECT DISTINCT dia, AVG(cant_dia) as prom_dia
 FROM (SELECT p.dia, p.tanda, COUNT(*) AS cant_dia
 FROM Publicidad p
 GROUP BY p.dia, p.tanda)
-GROUP BY dia
-
-/* no me gusta lo que devuelve.. revisar  */
-SELECT t.dia, t.hora, t.tanda
-FROM Tanda t, (SELECT DISTINCT dia, AVG(cant_dia) AS prom_dia
- FROM (SELECT p.dia, p.tanda, COUNT(*) AS cant_dia
- FROM Publicidad p
- GROUP BY p.dia, p.tanda)
- GROUP BY dia) rdo_prom, (SELECT p.dia, p.tanda, COUNT(*) AS cant
- FROM Publicidad p
- GROUP BY p.dia, p.tanda) rdo_cant
-WHERE t.dia = rdo_prom.dia AND  t.dia=rdo_cant.dia AND t.tanda = rdo_cant.tanda AND rdo_cant.cant > rdo_prom.prom_dia
-
+GROUP BY dia) r
+WHERE t.cant_anuncios > r.prom_dia
  
  7) 
 select distinct p.nombre
