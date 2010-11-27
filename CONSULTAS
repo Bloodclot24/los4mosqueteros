@@ -67,26 +67,18 @@ WHERE EXISTS (
    WHERE e1.COD_PROG = p.COD_PROG AND e2.COD_PROG = p.COD_PROG AND e3.COD_PROG = p.COD_PROG AND e4.COD_PROG = p.COD_PROG AND e5.COD_PROG = p.COD_PROG AND e1.DIA = 'LUN' AND e2.DIA = 'MAR' AND e3.DIA = 'MIE' AND e4.DIA = 'JUE' AND e5.DIA = 'VIE'
 )
 
-10) /********** no me devuelve bien las cosas **********/
+8)
+select distinct e.dia
+from espacio e
+where not exists(select * from estudio est where not exists(select * from ocupacion oc, espacio e1 where oc.estudio=est.estudio and e1.cod_prog=oc.cod_prog and e1.dia=e.dia));
 
 
-select p.NOMBRE 
+10)
+/********Para debbugear o ver si es correcto, agregar p.cod_prog y asi es mas facil**********/
+select distinct p.NOMBRE
 from PROGRAMA p, ESPACIO e
 where e.COD_PROG=p.COD_PROG
-and e.DIA in 
-	(select e1.DIA 
-	from ESPACIO e1 
-	where  not exists
-				(select * 
-				from MOVIL_EXTERIOR me 
-				where not exists
-					(select * 
-					from UTILIZACION ut1,ESPACIO e2 
-					where e2.COD_PROG=ut1.COD_PROG and ut1.MOVIL=me.MOVIL and e2.DIA=e1.DIA
-					)
-				)
-	)
-
+and not exists(select * from (select e1.DIA from ESPACIO e1 where  not exists(select * from MOVIL_EXTERIOR me where not exists(select * from UTILIZACION ut1,ESPACIO e2 where e2.COD_PROG=ut1.COD_PROG and ut1.MOVIL=me.MOVIL and e2.DIA=e1.DIA))) e4 where not exists(select * from espacio e3, programa p1 where e3.cod_prog=p1.cod_prog and e3.dia=e4.dia and p1.cod_prog=p.cod_prog));
 
 
 
