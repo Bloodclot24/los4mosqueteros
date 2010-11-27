@@ -1,10 +1,10 @@
 1)
-SELECT  p.COD_PROG, p.NOMBRE
-FROM PROGRAMA p
-WHERE NOT EXISTS (
- SELECT *
- FROM PROGRAMA p2, ESPACIO e
- WHERE p2.COD_PROG = P.COD_PROG AND p.COD_PROG = e.COD_PROG AND (e.DIA = 'DOM' OR e.DIA = 'SAB') )
+SELECT  p.COD_PROG, p.NOMBRE 
+FROM PROGRAMA p 
+WHERE NOT EXISTS ( 
+ SELECT * 
+ FROM PROGRAMA p2, ESPACIO e 
+ WHERE p2.COD_PROG = P.COD_PROG AND p.COD_PROG = e.COD_PROG AND e.DIA  IN('DOM', 'SAB') );
  
  2)   
  SELECT DIA, COUNT(DIA) AS CANT_ANUNCIOS
@@ -33,27 +33,13 @@ where a.cuenta=an.cuenta and an.titulo=p.titulo and p.dia=e.dia and p.hora=e.hor
 group by a.razon_social) res);
  
 
-4)/**** La que mando sebastian al mail****/
-SELECT findesemana.nombre, findesemana.promedio FROM
-(SELECT pro.nombre, Sum(resultado.veces) / 5 AS promedio FROM programa pro, (
-        SELECT esp.cod_prog, count(*) AS veces FROM espacio esp
-        WHERE esp.cod_prog IN (SELECT cod_prog FROM produccion)
-        AND (esp.dia!='DOM' AND esp.dia!='SAB')
-        GROUP BY esp.dia, esp.cod_prog
-        ORDER BY esp.cod_prog, esp.dia)  resultado
-WHERE pro.cod_prog = resultado.cod_prog
-GROUP BY pro.nombre) semana,
-(SELECT pro.nombre, Sum(resultado.veces) / 2 AS promedio FROM programa pro, (
-        SELECT esp.cod_prog, count(*) AS veces FROM espacio esp
-        WHERE esp.cod_prog IN (SELECT cod_prog FROM produccion)
-        AND (esp.dia='DOM' OR esp.dia='SAB')
-        GROUP BY esp.dia, esp.cod_prog
-        ORDER BY esp.cod_prog, esp.dia)  resultado
-WHERE pro.cod_prog = resultado.cod_prog
-GROUP BY pro.nombre) findesemana
-WHERE semana.nombre = findesemana.nombre
-AND findesemana.promedio > semana.promedio
+4)
 
+select p.nombre
+from (select res_sem.cod_prog, sum(res_sem.veces)/5 AS promedio_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e where e.dia not in ('SAB','DOM') group by e.cod_prog,e.dia) res_sem
+group by res_sem.cod_prog) prom_sem,(select res_fin.cod_prog, sum(res_fin.veces)/2 AS promedio_fin_de_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e where e.dia in ('SAB','DOM') group by e.cod_prog,e.dia) res_fin
+group by res_fin.cod_prog) prom_fin_de_semana, programa p
+where prom_fin_de_semana.promedio_fin_de_semana>prom_sem.promedio_semana and prom_fin_de_semana.cod_prog=prom_sem.cod_prog and p.cod_prog=prom_sem.cod_prog; 
  
  5) 
 
