@@ -69,6 +69,37 @@ FROM Publicidad
 GROUP BY dia, hora, tanda)
 GROUP BY dia) r
 WHERE t.dia = r.dia AND t.cant_anuncios > r.prom_dia
+
+6)
+
+
+
+SELECT dia, MAX (anun_distintos) AS max_dia
+FROM
+(SELECT e.dia, e.hora, COUNT(DISTINCT p.titulo) AS anun_distintos
+FROM Espacio e, Publicidad p
+WHERE e.dia = p.dia AND e.hora = p.hora
+GROUP BY e.dia, e.hora)
+GROUP BY dia
+
+/* no me convence como esta hecho.. despues lo reviso .. el order by es para que se vea lindo el resultado */
+SELECT es.dia, es.hora, pr.nombre, anun_distintos
+FROM Espacio es, Programa pr, (SELECT e.dia, e.hora, COUNT(DISTINCT p.titulo) AS anun_distintos
+FROM Espacio e, Publicidad p
+WHERE e.dia = p.dia AND e.hora = p.hora
+GROUP BY e.dia, e.hora) cant, (SELECT dia, MAX (anun_distintos) AS max_dia
+FROM
+(SELECT e.dia, e.hora, COUNT(DISTINCT p.titulo) AS anun_distintos
+FROM Espacio e, Publicidad p
+WHERE e.dia = p.dia AND e.hora = p.hora
+GROUP BY e.dia, e.hora)
+GROUP BY dia) total
+WHERE es.cod_prog = pr.cod_prog AND cant.dia = es.dia AND cant.hora = es.hora AND cant.anun_distintos = total.max_dia AND total.dia = es.dia
+
+
+order by es.dia
+
+
  
  7) 
 select distinct p.nombre
