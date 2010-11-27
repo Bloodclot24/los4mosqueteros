@@ -75,19 +75,12 @@ FROM Tanda t, (SELECT DISTINCT dia, AVG(cant_dia) AS prom_dia
 WHERE t.dia = rdo_prom.dia AND  t.dia=rdo_cant.dia AND t.tanda = rdo_cant.tanda AND rdo_cant.cant > rdo_prom.prom_dia
 
  
- 7) /****** QUEDO HORRIBLE PERO FUE LA UNICA FORMA QUE ENCONTRE **********/
- SELECT p.NOMBRE
-FROM PROGRAMA p
-WHERE EXISTS (
-   SELECT *
-   FROM OCUPACION o
-  WHERE p.COD_PROG = o.COD_PROG
-)
-          AND EXISTS (
-    SELECT *
-   FROM ESPACIO e1, ESPACIO e2,ESPACIO e3, ESPACIO e4, ESPACIO e5
-   WHERE e1.COD_PROG = p.COD_PROG AND e2.COD_PROG = p.COD_PROG AND e3.COD_PROG = p.COD_PROG AND e4.COD_PROG = p.COD_PROG AND e5.COD_PROG = p.COD_PROG AND e1.DIA = 'LUN' AND e2.DIA = 'MAR' AND e3.DIA = 'MIE' AND e4.DIA = 'JUE' AND e5.DIA = 'VIE'
-)
+ 7) 
+select distinct p.nombre
+from programa p, ocupacion o
+where o.cod_prog=p.cod_prog
+and not exists(select 'dias habiles' from espacio e where e.dia not in('SAB','DOM')
+and not exists(select 'programa en vivo' from ocupacion oc,espacio e1 where oc.cod_prog=e1.cod_prog and e1.dia=e.dia and oc.cod_prog=o.cod_prog));
 
 8)
 select distinct e.dia
