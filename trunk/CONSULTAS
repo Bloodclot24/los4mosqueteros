@@ -22,16 +22,15 @@ HAVING COUNT(DIA) = (
 )
  
  
-3) /* falta seleccionar el maximo */
-SELECT razon_social, suma FROM anunciante,  (SELECT cuenta, count(*) suma  FROM (
-           SELECT  DISTINCT anu.cuenta, esp.cod_prog FROM publicidad pub, anuncio anu, espacio esp
-           WHERE pub.titulo = anu.titulo
-           AND pub.dia = esp.dia
-           AND pub.hora = esp.hora
-      )
-GROUP BY cuenta
-) resultado
-WHERE anunciante.cuenta = resultado.cuenta 
+3)
+select a.razon_social
+from anunciante a, anuncio an,publicidad p, espacio e
+where a.cuenta=an.cuenta and an.titulo=p.titulo and p.dia=e.dia and p.hora=e.hora 
+group by a.razon_social
+having count(distinct e.cod_prog)>=all(select res.cantidad_programas_distintos from (select a.razon_social,count(distinct e.cod_prog) AS cantidad_programas_distintos
+from anunciante a, anuncio an,publicidad p, espacio e
+where a.cuenta=an.cuenta and an.titulo=p.titulo and p.dia=e.dia and p.hora=e.hora
+group by a.razon_social) res);
  
 
 4)/**** La que mando sebastian al mail****/
@@ -113,6 +112,13 @@ select distinct e.dia
 from espacio e
 where not exists(select * from estudio est where not exists(select * from ocupacion oc, espacio e1 where oc.estudio=est.estudio and e1.cod_prog=oc.cod_prog and e1.dia=e.dia));
 
+9)
+select a.razon_social
+from anunciante a
+where not exists(select 'Programas de Romualdo' from produccion pr, productor prd where pr.cuit=prd.cuit and prd.razon_social='Romualdo' and
+not exists(select 'anuncios de programas de Romualdo'
+from  anunciante a1, anuncio an,publicidad p, espacio e
+where a1.cuenta=an.cuenta and an.titulo=p.titulo and e.dia=p.dia and e.hora=p.hora and e.cod_prog=pr.cod_prog and a1.razon_social=a.razon_social));
 
 10)
 /********Para debbugear o ver si es correcto, agregar p.cod_prog y asi es mas facil**********/
