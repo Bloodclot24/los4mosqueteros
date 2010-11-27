@@ -64,11 +64,11 @@ FROM
 FROM Publicidad 
 GROUP BY dia, hora, tanda) t, 
  (SELECT DISTINCT dia, AVG(cant_dia) as prom_dia
-FROM (SELECT p.dia, p.tanda, COUNT(*) AS cant_dia
-FROM Publicidad p
-GROUP BY p.dia, p.tanda)
+FROM (SELECT dia, hora, tanda, COUNT(*) AS cant_dia
+FROM Publicidad
+GROUP BY dia, hora, tanda)
 GROUP BY dia) r
-WHERE t.cant_anuncios > r.prom_dia
+WHERE t.dia = r.dia AND t.cant_anuncios > r.prom_dia
  
  7) 
 select distinct p.nombre
