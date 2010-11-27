@@ -33,6 +33,28 @@ GROUP BY cuenta
 ) resultado
 WHERE anunciante.cuenta = resultado.cuenta 
  
+
+4)/**** La que mando sebastian al mail****/
+SELECT findesemana.nombre, findesemana.promedio FROM
+(SELECT pro.nombre, Sum(resultado.veces) / 5 AS promedio FROM programa pro, (
+        SELECT esp.cod_prog, count(*) AS veces FROM espacio esp
+        WHERE esp.cod_prog IN (SELECT cod_prog FROM produccion)
+        AND (esp.dia!='DOM' AND esp.dia!='SAB')
+        GROUP BY esp.dia, esp.cod_prog
+        ORDER BY esp.cod_prog, esp.dia)  resultado
+WHERE pro.cod_prog = resultado.cod_prog
+GROUP BY pro.nombre) semana,
+(SELECT pro.nombre, Sum(resultado.veces) / 2 AS promedio FROM programa pro, (
+        SELECT esp.cod_prog, count(*) AS veces FROM espacio esp
+        WHERE esp.cod_prog IN (SELECT cod_prog FROM produccion)
+        AND (esp.dia='DOM' OR esp.dia='SAB')
+        GROUP BY esp.dia, esp.cod_prog
+        ORDER BY esp.cod_prog, esp.dia)  resultado
+WHERE pro.cod_prog = resultado.cod_prog
+GROUP BY pro.nombre) findesemana
+WHERE semana.nombre = findesemana.nombre
+AND findesemana.promedio > semana.promedio
+
  
  5) /* hasta aca hace promedio */
  SELECT DISTINCT dia, AVG(cant_dia) as prom_dia
