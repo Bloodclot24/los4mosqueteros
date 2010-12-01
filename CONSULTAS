@@ -36,10 +36,10 @@ group by a.razon_social) res);
 4)
 
 select p.nombre
-from (select res_sem.cod_prog, sum(res_sem.veces)/5 AS promedio_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e where e.dia not in ('SAB','DOM') group by e.cod_prog,e.dia) res_sem
-group by res_sem.cod_prog) prom_sem,(select res_fin.cod_prog, sum(res_fin.veces)/2 AS promedio_fin_de_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e where e.dia in ('SAB','DOM') group by e.cod_prog,e.dia) res_fin
+from (select res_sem.cod_prog, sum(res_sem.veces)/5 AS promedio_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e,produccion pr where e.dia not in ('SAB','DOM') and e.cod_prog=pr.cod_prog group by e.cod_prog,e.dia) res_sem 
+group by res_sem.cod_prog) prom_sem,(select res_fin.cod_prog, sum(res_fin.veces)/2 AS promedio_fin_de_semana from(select e.dia, e.cod_prog, count(*) AS veces from espacio e,produccion pr where e.dia in ('SAB','DOM') and e.cod_prog=pr.cod_prog group by e.cod_prog,e.dia) res_fin 
 group by res_fin.cod_prog) prom_fin_de_semana, programa p
-where prom_fin_de_semana.promedio_fin_de_semana>prom_sem.promedio_semana and prom_fin_de_semana.cod_prog=prom_sem.cod_prog and p.cod_prog=prom_sem.cod_prog; 
+where prom_fin_de_semana.promedio_fin_de_semana>prom_sem.promedio_semana and prom_fin_de_semana.cod_prog=prom_sem.cod_prog and p.cod_prog=prom_sem.cod_prog;
  
  5) 
 
